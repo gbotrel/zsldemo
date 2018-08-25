@@ -51,7 +51,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-You'll need to install `docker` and `docker-compose`. Computing zkSNARKs is memory intensive, so you'll also need to give more RAM (default is 2Gb) to the `docker` daemon. 
+You'll need to install `go`, `docker` and `docker-compose`. Computing zkSNARKs is memory intensive, so you'll also need to give more RAM (default is 2Gb) to the `docker` daemon. 
 
 ### Running
 
@@ -86,11 +86,14 @@ go test
 
 ### Architecture
 
-####*WIP TO BE COMPLETED*
+#### *WIP TO BE COMPLETED*
 
 3 services, `ZSLBox`, a `geth` running in dev mode and `zsldemo`. 
 `zsldemo` serves static files (DApp) that connect to `ZSLBox` through `grpc-web` and to `geth` through `gopherjs-eth` a [GopherJS](https://github.com/gopherjs/gopherjs) wrapper for `web3.js`. 
 
-**Note:** the whole project is coded in Go. It is a [GopherJS](https://github.com/gopherjs/gopherjs) experiment, and while few things are frustrating (for example, the 1.5 mb size of the minified JS output), it works surpinsingly well. Go 1.11 is introducing WASM, and I believe in the coming months, we could see a credible dev/prod workflow to develop DApp in Go, whether because it is a native DApp, or because like me, you're allergic to Javascript (`gulp`, `bower`,`npm`,`yarn`,`browserify`,`webpack`,`clojure`,...) and happy with the excellent standard lib and toolchain from go (`go vet`, `go build`, `go test`, `go generate`, `go doc`, `dep`)
+**Note:** the whole project is coded in Go. 
 
+It is a [GopherJS](https://github.com/gopherjs/gopherjs) experiment, and while few things are frustrating (for example, the 1.5 mb size of the minified JS output), it works surpinsingly well. Go 1.11 is introducing WASM, and I believe in the coming months, we could see a credible dev/prod workflow to develop DApp in Go, whether because it is a native DApp, or because like me, you're allergic to untyped Javascript (`gulp`, `bower`,`npm`,`yarn`,`browserify`,`webpack`,`clojure`,...) and happy with the excellent standard lib and toolchain from go (`go vet`, `go build`, `go test`, `go generate`, `go doc`, `dep`)
+
+If you want to know more or get notified for what's coming next, get in touch (see my profile) or follow ConsenSys & me on Medium. 
 
