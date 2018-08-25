@@ -1,0 +1,423 @@
+// -------------------------------------------------------------------------------------------------
+// Import material colors
+@import "material-color";
+@mixin currency {
+    font-size: 70%;
+    white-space: normal;
+    overflow: auto;
+    text-overflow: initial;
+    display: inline-block;
+    min-width: 20px;
+    font-weight: lighter;
+    line-height: 16px;
+    margin-left: 2px;
+}
+
+@mixin highlightRow {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 2s;
+    -moz-animation-timing-function: linear;
+
+    animation-name: blinker;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+// -------------------------------------------------------------------------------------------------
+// Body wide
+html,
+button,
+input,
+select,
+textarea,
+.pure-g [class *="pure-u"] {
+    /* Set your content font stack here: */
+    font-family: 'Roboto', sans-serif;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+// -------------------------------------------------------------------------------------------------
+// Colors
+$color-text:$clr-grey-800;
+$color-text-accent:$clr-grey-700;
+$color-primary:$clr-blue-600;
+$color-primary-light:$clr-blue-50;
+$color-ok:$clr-green-700;
+$color-secondary:$clr-deep-orange-600;
+$color-secondary-almost:$clr-deep-orange-400;
+$color-secondary-light:$clr-deep-orange-50;
+
+
+
+// -------------------------------------------------------------------------------------------------
+// Application
+.application {
+    &__caption {
+        text-align: center;
+        font-size: 12px;
+        color: $color-text;
+    }
+    &__caption_instructions {
+        display: block;
+        color: $color-primary;
+    }
+    &__scrollable {
+        max-height: 200px;
+        overflow: auto;
+    }
+    &__table {
+        width: 100%;
+        td,
+        th {
+            text-align: center;
+            max-width: 150px;
+        }
+
+        th {
+            font-size: 90%;
+            color: $color-text-accent;
+            font-weight: lighter;
+        }
+
+        td {
+            span {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: inline-block;
+                max-width: 100%;
+            }
+        }
+        &_left {
+            text-align:left;
+        }
+    }
+
+    &__table_first_row {
+        @include highlightRow;
+    }
+
+    &__table_cell_balance {
+        width: 50%;
+    }
+
+
+    &__log_type {
+        color: $color-text;
+        width:150px;
+    }
+    &__log_value {
+        color: $color-primary;
+        width:50px;
+        text-align:right;
+    }
+    &__log {
+        color: $color-text;
+    }
+    &__log_transfer {
+        color: $color-secondary;
+        width:200px;
+    }
+
+    &__table_cell_action {
+        width: 20px;
+        $_font-size: 12px;
+        .spent {
+            font-size: $_font-size;
+            color: $color-text;
+        }
+
+        .pending {
+            font-size: $_font-size;
+            color: $color-primary;
+        }
+
+        .copy {
+            color: $color-text-accent;
+        }
+    }
+    &__setup,
+    &__setup_bad {
+        width: 400px;
+        margin: 0 auto;
+        margin-top: 50px;
+        padding: 5px;
+        background-color: $color-primary-light;
+        &_true {
+            color: $color-ok;
+        }
+        &_false {
+            color: $color-secondary;
+        }
+    }
+    &__setup_bad {
+        background-color: $color-secondary-light;
+    }
+
+    &__actions {
+        button {
+            display: block;
+            margin: 0 auto;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            background-color: $color-primary;
+        }
+    }
+
+    .currency__zeth {
+        @include currency;
+        color: $color-secondary;
+    }
+
+    .currency__eth {
+        @include currency;
+        color: $color-text-accent;
+    }
+
+    &__snackbar {
+        width: 350px;
+        margin: 0 auto;
+        margin-left: -175px;
+        background-color: $color-ok;
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        bottom: 30px;
+        left: 50%;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+
+        &_error {
+            background-color: $clr-red-800;
+            ;
+        }
+    }
+
+
+    &__loader {
+        border: 10px solid $color-text-accent;
+        border-top: 10px solid $color-primary;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+        margin-top: 100px;
+    }
+
+    &__modal {
+        position: fixed;
+        z-index: 1;
+        padding-top: 50px;
+        left: 0;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+    &__modal_status {
+        text-align: center;
+        &_accent {
+            color: $color-primary;
+        }
+    }
+
+
+    &__modal_loader {
+        border: 5px solid $color-text-accent;
+        border-top: 5px solid $color-primary;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+
+    &__modal_close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    &__modal_close:hover,
+    &__modal_close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    &__modal_content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+}
+
+
+// -------------------------------------------------------------------------------------------------
+// Wallet
+.wallet {
+    padding: 12px;
+    &__table_row_pending {
+        background-color: $color-primary-light;
+    }
+
+    &__table_row_spent {
+        background-color: $clr-grey-100;
+    }
+}
+
+
+// -------------------------------------------------------------------------------------------------
+// Blockchain
+.blockchain {
+    height: 100%;
+    padding: 12px;
+    background-color: $clr-grey-100;
+    td {
+        background-color: $clr-grey-50;
+    }
+    th {
+        font-size: 90%;
+        color: white;
+        background-color: $clr-grey-500;
+        font-weight: lighter;
+    }
+
+    &__transfer_count {
+        color: $color-secondary;
+    }
+
+    &__shielding_count {
+        color: $color-text;
+    }
+
+    &__unshielding_count {
+        color: $color-text;
+    }
+    &__wrong_network {
+        color: $color-secondary;
+    }
+    &__connected {
+        color: $color-ok;
+    }
+    &__not_connected {
+        color: $color-secondary;
+    }
+    &__account {
+        color: $color-text;
+    }
+}
+
+
+
+
+// -------------------------------------------------------------------------------------------------
+// Animations (loader and snackbar)
+@-moz-keyframes blinker {
+    0% {
+        background-color: $color-secondary-light;
+    }
+    50% {
+        background-color: $color-secondary-almost;
+    }
+    100% {
+        background-color: $color-secondary;
+    }
+}
+
+@-webkit-keyframes blinker {
+    0% {
+        background-color: $color-secondary-light;
+    }
+    50% {
+        background-color: $color-secondary-almost;
+    }
+    100% {
+        background-color: $color-secondary;
+    }
+}
+
+@keyframes blinker {
+    0% {
+        background-color: $color-secondary-light;
+    }
+    50% {
+        background-color: $color-secondary-almost;
+    }
+    100% {
+        background-color: $color-secondary;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}

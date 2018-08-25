@@ -1,0 +1,344 @@
+html,
+button,
+input,
+select,
+textarea,
+.pure-g [class*=pure-u] {
+  /* Set your content font stack here: */
+  font-family: "Roboto", sans-serif;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.application__caption {
+  text-align: center;
+  font-size: 12px;
+  color: #424242;
+}
+.application__caption_instructions {
+  display: block;
+  color: #1e88e5;
+}
+.application__scrollable {
+  max-height: 200px;
+  overflow: auto;
+}
+.application__table {
+  width: 100%;
+}
+.application__table td,
+.application__table th {
+  text-align: center;
+  max-width: 150px;
+}
+.application__table th {
+  font-size: 90%;
+  color: #616161;
+  font-weight: lighter;
+}
+.application__table td span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 100%;
+}
+.application__table_left {
+  text-align: left;
+}
+.application__table_first_row {
+  -webkit-animation-name: blinker;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: blinker;
+  -moz-animation-duration: 2s;
+  -moz-animation-timing-function: linear;
+  animation-name: blinker;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+}
+.application__table_cell_balance {
+  width: 50%;
+}
+.application__log_type {
+  color: #424242;
+  width: 150px;
+}
+.application__log_value {
+  color: #1e88e5;
+  width: 50px;
+  text-align: right;
+}
+.application__log {
+  color: #424242;
+}
+.application__log_transfer {
+  color: #f4511e;
+  width: 200px;
+}
+.application__table_cell_action {
+  width: 20px;
+}
+.application__table_cell_action .spent {
+  font-size: 12px;
+  color: #424242;
+}
+.application__table_cell_action .pending {
+  font-size: 12px;
+  color: #1e88e5;
+}
+.application__table_cell_action .copy {
+  color: #616161;
+}
+.application__setup, .application__setup_bad {
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 5px;
+  background-color: #e3f2fd;
+}
+.application__setup_true, .application__setup_bad_true {
+  color: #388e3c;
+}
+.application__setup_false, .application__setup_bad_false {
+  color: #f4511e;
+}
+.application__setup_bad {
+  background-color: #fbe9e7;
+}
+.application__actions button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  background-color: #1e88e5;
+}
+.application .currency__zeth {
+  font-size: 70%;
+  white-space: normal;
+  overflow: auto;
+  text-overflow: initial;
+  display: inline-block;
+  min-width: 20px;
+  font-weight: lighter;
+  line-height: 16px;
+  margin-left: 2px;
+  color: #f4511e;
+}
+.application .currency__eth {
+  font-size: 70%;
+  white-space: normal;
+  overflow: auto;
+  text-overflow: initial;
+  display: inline-block;
+  min-width: 20px;
+  font-weight: lighter;
+  line-height: 16px;
+  margin-left: 2px;
+  color: #616161;
+}
+.application__snackbar {
+  width: 350px;
+  margin: 0 auto;
+  margin-left: -175px;
+  background-color: #388e3c;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  bottom: 30px;
+  left: 50%;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+.application__snackbar_error {
+  background-color: #c62828;
+}
+.application__loader {
+  border: 10px solid #616161;
+  border-top: 10px solid #1e88e5;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+.application__modal {
+  position: fixed;
+  z-index: 1;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.application__modal_status {
+  text-align: center;
+}
+.application__modal_status_accent {
+  color: #1e88e5;
+}
+.application__modal_loader {
+  border: 5px solid #616161;
+  border-top: 5px solid #1e88e5;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+.application__modal_close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.application__modal_close:hover, .application__modal_close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.application__modal_content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.wallet {
+  padding: 12px;
+}
+.wallet__table_row_pending {
+  background-color: #e3f2fd;
+}
+.wallet__table_row_spent {
+  background-color: #f5f5f5;
+}
+
+.blockchain {
+  height: 100%;
+  padding: 12px;
+  background-color: #f5f5f5;
+}
+.blockchain td {
+  background-color: #fafafa;
+}
+.blockchain th {
+  font-size: 90%;
+  color: white;
+  background-color: #9e9e9e;
+  font-weight: lighter;
+}
+.blockchain__transfer_count {
+  color: #f4511e;
+}
+.blockchain__shielding_count {
+  color: #424242;
+}
+.blockchain__unshielding_count {
+  color: #424242;
+}
+.blockchain__wrong_network {
+  color: #f4511e;
+}
+.blockchain__connected {
+  color: #388e3c;
+}
+.blockchain__not_connected {
+  color: #f4511e;
+}
+.blockchain__account {
+  color: #424242;
+}
+
+@-moz-keyframes blinker {
+  0% {
+    background-color: #fbe9e7;
+  }
+  50% {
+    background-color: #ff7043;
+  }
+  100% {
+    background-color: #f4511e;
+  }
+}
+@-webkit-keyframes blinker {
+  0% {
+    background-color: #fbe9e7;
+  }
+  50% {
+    background-color: #ff7043;
+  }
+  100% {
+    background-color: #f4511e;
+  }
+}
+@keyframes blinker {
+  0% {
+    background-color: #fbe9e7;
+  }
+  50% {
+    background-color: #ff7043;
+  }
+  100% {
+    background-color: #f4511e;
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+/*# sourceMappingURL=app.css.map */

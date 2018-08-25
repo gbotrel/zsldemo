@@ -1,0 +1,54 @@
+version: "3"
+services:
+  # zsldemo serves the dAPP (frontend)
+  zsldemo:
+    hostname: zsldemo
+    build: .
+    ports:
+      - 8001:8001
+    restart: always
+    depends_on:
+      - zslgeth
+    networks: 
+      - zslnet
+  # zslgeth = geth + zsl precompiled smart contracts
+  zslgeth:
+    image: pegasystech/zslgeth:latest
+    hostname: zslgeth
+    command: --dev --rpc --rpcapi "db,eth,net,web3,clique,personal,shh" -rpccorsdomain "*" --targetgaslimit '9000000000000' --gasprice=0  --rpcaddr "0.0.0.0"  -networkid 1337
+    environment:
+      - ZSLBOX_URL=172.25.0.102:9000
+    ports: 
+      - 8545:8545
+    restart: always
+    depends_on:
+      - zslbox
+    networks:
+      zslnet: 
+        ipv4_address: 172.25.0.101
+    volumes:
+      - zslgeth-data:/root/.ethereum
+  # zslbox offers grpc endpoint to compute "zcash" zkSNARK proofs 
+  zslbox:
+    image: pegasystech/zslbox:latest
+    hostname: zslbox
+    ports: 
+      - 9000:9000
+      - 9001:9001
+    restart: always
+    networks:
+      zslnet: 
+        ipv4_address: 172.25.0.102
+    volumes:
+      - zslbox-keys:/keys
+
+networks:
+  zslnet:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.25.0.0/24
+
+volumes:
+  zslgeth-data:
+  zslbox-keys:

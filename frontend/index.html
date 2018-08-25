@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZSL Demo</title>
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link href='css/app.css' rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <!-- Split our grid in 2  (wallet and blockchain) -->
+    <div class="application">
+        <div class="pure-g" v-if="loaded && bankLoaded" v-cloak>
+            <!-- Grid 1: Wallet -->
+            <div class="pure-u-1-2">
+                <!-- Wallet container, to allow padding -->
+                <div class="wallet">
+                    <h2>Wallet <span class="application__caption">(local to one participant)</span></h2>
+                    <!-- Balances -->
+                    <div>
+                        <h3>Balances</h3>
+                        <table class="application__table pure-table">
+                            <thead>
+                                <tr>
+                                    <th>ledger</th>
+                                    <th>shielded</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="application__table_cell_balance"><span>{{ blockchain['balance'] }}</span><span class="currency__eth">ETH</span></td>
+                                    <td class="application__table_cell_balance"><span>{{ wallet['balance'] }}</span><span class="currency__zeth">ZETH</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="application__actions pure-g">
+                            <div class="pure-u-1-1 ">
+                                <button class="pure-button pure-button-primary" v-on:click="BtnShieldClicked">
+                                    <i class="fa fa-user-shield"></i> Shield
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <span class="application__caption pure-u-1-1"><span class="currency__eth">ETH</span> to <span class="currency__zeth">ZETH</span></span>
+                        </div>
+                    </div>
+                    <!-- My Keys -->
+                    <div>
+                        <h3>My keys</h3>
+                        <div class="application__scrollable">
+                            <table class="application__table pure-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th v-for="h in wallet['keys']['headers']">
+                                            {{ h }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="row in wallet['keys']['rows']">
+                                        <td class="application__table_cell_action">
+                                            <a href="#" v-on:click="CopyToClipboard(row[0]['value'])"><i class="fa fa-copy copy"></i></a>
+                                        </td>
+                                        <td v-for="cell in row">
+                                            <span>{{cell['value']}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="application__actions pure-g">
+                            <div class="pure-u-1-1 ">
+                                <button class="pure-button pure-button-primary" v-on:click="BtnGenerateClicked">
+                                    Generate
+                                </button>
+                                <input type="hidden" name="trick" v-model="hiddenTrick">
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <span class="application__caption pure-u-1-1">Generate a new keypair. pk is the "receive" address (ZETH)</span>
+                        </div>
+                    </div>
+                    <!-- My Notes -->
+                    <div>
+                        <h3>My notes</h3>
+                        <div class="application__scrollable">
+                            <table class="application__table pure-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th v-for="h in wallet['notes']['headers']">
+                                            {{ h }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="row in wallet['notes']['rows']" v-bind:class="{ wallet__table_row_pending: row[0]['type'] === 'pending',wallet__table_row_spent: row[0]['type'] === 'spent'  }">
+                                        <td class="application__table_cell_action">
+                                            <span v-if="row[0]['type'] === 'pending'" class="pending">pending</span>
+                                            <span v-else-if="row[0]['type'] === 'spent'" class="spent">spent</span>
+                                            <input v-else type="checkbox" v-model="wallet['selectedNotes']" v-bind:value="row[0]['value']">
+                                        </td>
+                                        <td v-for="cell in row">
+                                            <span>{{cell['value']}}</span><span v-if="cell['type'] === 'zeth'" class="currency__zeth">ZETH</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="application__actions pure-g">
+                            <div class="pure-u-1-2 ">
+                                <button class="pure-button pure-button-primary" :disabled="wallet['selectedNotes'].length !== 2" v-on:click="BtnTransferClicked">
+                                    Transfer
+                                </button>
+                            </div>
+                            <div class="pure-u-1-2 ">
+                                <button class="pure-button pure-button-primary" :disabled="wallet['selectedNotes'].length !== 1" v-on:click="BtnUnshieldClicked">
+                                    Unshield
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="application__caption pure-u-1-2">
+                                <span><span class="currency__zeth">ZETH</span> to <span class="currency__zeth">ZETH</span></span>
+                                <span v-if="wallet['selectedNotes'].length !== 2" class="application__caption_instructions">select 2 notes</span>
+                            </div>
+                            <div class="application__caption pure-u-1-2">
+                                <span><span class="currency__zeth">ZETH</span> to <span class="currency__eth">ETH</span></span>
+                                <span v-if="wallet['selectedNotes'].length !== 1" class="application__caption_instructions">select 1 note</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Grid 2: Blockchain -->
+            <div class="pure-u-1-2">
+                <div class="blockchain">
+                    <h2>Blockchain <span class="application__caption">(shared by all participants)</span></h2>
+                    <div v-if="blockchain['connected']">
+                        <p>
+                            <span class="blockchain__connected">Account - <span class="blockchain__account">{{ blockchain['account'] }}</span></span>
+                        </p>
+                        <p>
+                            <span class="blockchain__connected">PrivateBank - <span class="blockchain__account">{{ bankAddress }}</span></span>
+                        </p>
+                    </div>
+                    <div v-else>
+                        <span class="blockchain__not_connected">Not connected</span>
+                    </div>
+                    <h3>Stats</h3>
+                    <table class="application__table pure-table">
+                        <thead>
+                            <tr>
+                                <th>supply</th>
+                                <th>transfers</th>
+                                <th>shielding</th>
+                                <th>unshielding</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span>{{ blockchain['supply'] }}</span><span class="currency__zeth">ZETH</span>
+                                </td>
+                                <td>{{ blockchain['cptTransfers'] }}</td>
+                                <td>{{ blockchain['cptShielding'] }}</td>
+                                <td>{{ blockchain['cptUnshielding'] }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>Logs</h3>
+                    <div class="application__scrollable">
+                        <table class="application__table pure-table">
+                            <thead>
+                                <tr>
+                                    <th v-for="h in blockchain['events']['headers']" style="text-align: left;">
+                                        {{ h }}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="row in blockchain['events']['rows']">
+                                    <td v-for="cell in row" style="text-align: left;">
+                                        <span v-html="cell['value']"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3>State</h3>
+                    <div class="pure-g">
+                        <div class="application__scrollable pure-u-1-2">
+                            <table class="application__table pure-table">
+                                <thead>
+                                    <tr>
+                                        <th>commitments</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="row in blockchain['commitments']['rows']">
+                                        <td v-for="cell in row">
+                                            <span>{{cell['value']}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                        <div class="application__scrollable pure-u-1-2">
+                            <table class="application__table pure-table">
+                                <thead>
+                                    <tr>
+                                        <th>nullifiers</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="row in blockchain['nullifiers']['rows']">
+                                        <td v-for="cell in row">
+                                            <span>{{cell['value']}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Snackbars -->
+                <div class="application__snackbar" v-if="toastVisible">{{toastMessage}}</div>
+                <div class="application__snackbar application__snackbar_error" v-if="errorVisible">Oops, something went wrong, check the console</div>
+                <!-- Modal -->
+                <div class="application__modal" v-if="modalVisible">
+                    <div class="application__modal_content">
+                        <span class="application__modal_close" @click="CloseModal()" v-if="wallet['busy'] == false">&times;</span>
+                        <div v-if="shieldingInProgress">
+                            <h3><span class="currency__eth">ETH</span> --> <span class="currency__zeth">ZETH</span></h3>
+                            <p>Will create a new note and a proof that will be verified in PrivateBank.sol against the actual <span class="currency_eth">ETH</span> value in the call</p>
+                            <form class="pure-form pure-form-aligned" v-on:submit.prevent>
+                                <fieldset>
+                                    <div class="pure-control-group">
+                                        <label for="amount">Amount</label>
+                                        <input id="amount" type="number" v-model="shieldAmount" placeholder="0" min="0" oninput="validity.valid||(value='');">
+                                    </div>
+                                    <div class="pure-controls">
+                                        <button class="pure-button pure-button-primary" v-on:click="FormShieldSubmitted" :disabled="wallet['busy']"><i class="fa fa-user-shield"></i> Shield</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div v-if="transferInProgress">
+                            <h3>Shielded transfer</h3>
+                            <p>Will produces 2 notes
+                                <ul>
+                                    <li>1. value: {{transferAmount}} - for {{transferAddress}}</li>
+                                    <li>2. value: {{transferMax - transferAmount}} - for you "change money" - UTXO model</li>
+                                </ul>
+                            </p>
+                            <form class="pure-form pure-form-aligned" v-on:submit.prevent>
+                                <fieldset>
+                                    <div class="pure-control-group">
+                                        <label for="amount">Amount</label>
+                                        <input id="amount" type="number" v-model="transferAmount" placeholder="0" min="0" v-bind:max="transferMax" oninput="validity.valid||(value='');">
+                                    </div>
+                                    <div class="pure-control-group">
+                                        <label for="recipient">Recipient</label>
+                                        <input id="recipient" type="text" v-model="transferAddress" placeholder="0x">
+                                    </div>
+                                    <div class="pure-controls">
+                                        <button class="pure-button pure-button-primary" v-on:click="FormTransferSubmitted" :disabled="wallet['busy']">Transfer</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div v-if="wallet['busy']">
+                            <h3 class="application__modal_status application__modal_status_accent">{{modalClock}}</h3>
+                            <div class="application__modal_loader"></div>
+                            <h5 class="application__modal_status">{{modalStatus}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <div class="application__loader"></div>
+            <div class="application__setup_bad" v-if="loaded && !bankLoaded" v-cloak>
+                <h3>Setup PrivateBank smart contract</h3>
+                <div class="application__actions pure-g">
+                    <div class="pure-u-1-2 ">
+                        <button class="pure-button pure-button-primary" v-on:click="BtnDeployBankClicked">
+                            Deploy new
+                        </button>
+                    </div>
+                    <div class="pure-u-1-2 ">
+                        <button class="pure-button pure-button-primary" :disabled="bankAddress.length !== 42" v-on:click="BtnBindBankClicked">
+                            Bind at address
+                        </button>
+                        <input type="text" name="bankAddress" v-model="bankAddress" placeholder="0x...">
+                    </div>
+                </div>
+            </div>
+            <div v-bind:class="{application__setup_bad:!loaded,application__setup:loaded}" v-cloak>
+                <h3>Blockchain status</h3>
+                <form class="pure-form pure-form-aligned" v-on:submit.prevent>
+                    <fieldset>
+                        <div class="pure-control-group">
+                            <label>Web3 Found</label>
+                            <span v-bind:class="{ application__setup_true: blockchain['connected'], application__setup_false: blockchain['connected'] === false}">{{blockchain['connected']}}</span>
+                        </div>
+                        <div class="pure-control-group">
+                            <label>Metamask</label>
+                            <span v-bind:class="{ application__setup_false: blockchain['metamask'], application__setup_true: blockchain['metamask'] === false}">{{blockchain['metamask']}}</span>
+                        </div>
+                        <div class="pure-control-group">
+                            <label>Logged in</label>
+                            <span v-if="blockchain['account'] === '-'" class="application__setup_false">false</span>
+                            <span v-else class="application__setup_true">true</span>
+                        </div>
+                        <div class="pure-control-group">
+                            <label>Network ID</label>
+                            <span v-if="blockchain['networkID'] !== 1337" class="application__setup_false">{{blockchain['networkID']}}</span>
+                            <span v-else class="application__setup_true">{{blockchain['networkID']}}</span>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/web3.min.js"></script>
+    <script type="text/javascript" src="js/app.min.js"></script>
+    <!-- Running with gopherjs serve (devmode) -->
+     <!-- <script type="text/javascript" src="frontend.js"></script> -->
+</body>
+
+</html>
