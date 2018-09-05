@@ -3,36 +3,47 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:7d191fd0c54ff370eaf6116a14dafe2a328df487baea280699f597aae858d00d"
   name = "github.com/aristanetworks/goarista"
   packages = ["monotime"]
+  pruneopts = "UT"
   revision = "18b896026201d8e1758468d9c5d5a558c69c5e9b"
 
 [[projects]]
   branch = "master"
+  digest = "1:2c00f064ba355903866cbfbf3f7f4c0fe64af6638cc7d1b8bdcf3181bc67f1d8"
   name = "github.com/btcsuite/btcd"
   packages = ["btcec"]
+  pruneopts = "UT"
   revision = "f899737d7f2764dc13e4d01ff00108ec58f766a9"
 
 [[projects]]
+  digest = "1:7feab4352f828beb5cb23816069436c532323653d01f8fa64b83e51483d59ee6"
   name = "github.com/consensys/zslbox"
   packages = ["zsl"]
+  pruneopts = "UT"
   revision = "db32dc3bbe6c45d12735e30dd580ed6ed80440bc"
   version = "v0.2.1"
 
 [[projects]]
+  digest = "1:c166378e8ab0f794f293dfb941d250dd70b035b05dec58879f717621d0fe1714"
   name = "github.com/deckarep/golang-set"
   packages = ["."]
+  pruneopts = "UT"
   revision = "1d4478f51bed434f1dadf96dcd9b43aabac66795"
   version = "v1.7"
 
 [[projects]]
   branch = "master"
+  digest = "1:67d0b50be0549e610017cb91e0b0b745ec0cad7c613bc8e18ff2d1c1fc8825a7"
   name = "github.com/edsrzf/mmap-go"
   packages = ["."]
+  pruneopts = "UT"
   revision = "0bce6a6887123b67a60366d2c9fe2dfb74289d2e"
 
 [[projects]]
   branch = "zsl"
+  digest = "1:10517ceb948887d8df3fd3e784fc0e0176791284342e9a43d6272e216a7df14c"
   name = "github.com/ethereum/go-ethereum"
   packages = [
     ".",
@@ -70,123 +81,157 @@
     "params",
     "rlp",
     "rpc",
-    "trie"
+    "trie",
   ]
+  pruneopts = "T"
   revision = "cb26b9192043441794c83ec9e3c797222f804550"
   source = "github.com/gbotrel/go-ethereum"
 
 [[projects]]
   branch = "master"
+  digest = "1:ed47572953b9bf122a735727cee5689ea0b5d49181d0dca4acb520332b5ba9b0"
   name = "github.com/gbotrel/gopherjs-eth"
   packages = ["."]
+  pruneopts = "UT"
   revision = "fc5a356109dd2ffbb785fa62fc5428997e249e02"
 
 [[projects]]
+  digest = "1:c4a2528ccbcabf90f9f3c464a5fc9e302d592861bbfd0b7135a7de8a943d0406"
   name = "github.com/go-stack/stack"
   packages = ["."]
+  pruneopts = "UT"
   revision = "259ab82a6cad3992b4e21ff5cac294ccb06474bc"
   version = "v1.7.0"
 
 [[projects]]
+  digest = "1:35534a9283f212bdc542697dfca3c2700f2b2b1771e409476f08701b44c1709a"
   name = "github.com/gobuffalo/packr"
   packages = ["."]
+  pruneopts = "UT"
   revision = "1aab5672bd385f2a7da18bffa961912e7642ea79"
   version = "v1.13.2"
 
 [[projects]]
+  digest = "1:4c0989ca0bcd10799064318923b9bc2db6b4d6338dd75f3f2d86c3511aaaf5cf"
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
     "ptypes",
     "ptypes/any",
     "ptypes/duration",
-    "ptypes/timestamp"
+    "ptypes/timestamp",
   ]
+  pruneopts = "UT"
   revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
   version = "v1.2.0"
 
 [[projects]]
   branch = "master"
+  digest = "1:4a0c6bb4805508a6287675fac876be2ac1182539ca8a32468d8128882e9d5009"
   name = "github.com/golang/snappy"
   packages = ["."]
+  pruneopts = "UT"
   revision = "2e65f85255dbc3072edf28d6b5b8efc472979f5a"
 
 [[projects]]
   branch = "master"
+  digest = "1:f14d1b50e0075fb00177f12a96dd7addf93d1e2883c25befd17285b779549795"
   name = "github.com/gopherjs/gopherjs"
   packages = ["js"]
+  pruneopts = "UT"
   revision = "89baedc74dd74098df0c4ba8792e3cf6d722d4d0"
 
 [[projects]]
   branch = "master"
+  digest = "1:cf296baa185baae04a9a7004efee8511d08e2f5f51d4cbe5375da89722d681db"
   name = "github.com/hashicorp/golang-lru"
   packages = [
     ".",
-    "simplelru"
+    "simplelru",
   ]
+  pruneopts = "UT"
   revision = "0fb14efe8c47ae851c0034ed7a448854d3d34cf3"
 
 [[projects]]
+  digest = "1:2272faf510337725f1a29047316db397e1f19f9c9460dfb6d3ccbc9b1d47a8f5"
   name = "github.com/johanbrandhorst/protobuf"
   packages = [
     "grpcweb",
     "grpcweb/grpcwebjs",
     "grpcweb/status",
-    "jspb"
+    "jspb",
   ]
+  pruneopts = "UT"
   revision = "227432c61df7f8b5bace4bb8064797c2aea8dc28"
   version = "v0.7.1"
 
 [[projects]]
   branch = "master"
+  digest = "1:d80f9185f80694098350b94a8a9661a2f3a05e060fc4842330b6f50a95d94152"
   name = "github.com/jpmorganchase/zsl-q"
   packages = ["zsl-golang/zsl/sha256"]
+  pruneopts = "UT"
   revision = "b2649567e02f55bba43db1ea6f18d5c4b9c0051e"
 
 [[projects]]
   branch = "master"
+  digest = "1:6304237783689d510f00f08e9103f0456c39f55c3f7e9df229359ee2a67d65dc"
   name = "github.com/oskca/gopherjs-dom"
   packages = ["."]
+  pruneopts = "UT"
   revision = "32ec7beb35cf955fdc223ba03621f12e490edc7d"
 
 [[projects]]
   branch = "master"
+  digest = "1:4045b77170425b9f6ee2f74b1a2c97c206cae2a8cf026fc98a1039c958ac8995"
   name = "github.com/oskca/gopherjs-json"
   packages = ["."]
+  pruneopts = "UT"
   revision = "fa80e2036d4607f8e17dc282b2da430890efc116"
 
 [[projects]]
+  digest = "1:de661d3d0ce786ab7825af3b25c436c0b76bda04983fe3a55f48ab93b28bd7c1"
   name = "github.com/oskca/gopherjs-vue"
   packages = ["."]
+  pruneopts = "UT"
   revision = "d99f0021d0292597bc461b5ff811d70a5c5dc465"
   version = "v2"
 
 [[projects]]
+  digest = "1:361de06aa7ae272616cbe71c3994a654cc6316324e30998e650f7765b20c5b33"
   name = "github.com/pborman/uuid"
   packages = ["."]
+  pruneopts = "UT"
   revision = "e790cca94e6cc75c7064b1332e63811d4aae1a53"
   version = "v1.1"
 
 [[projects]]
+  digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
   name = "github.com/pkg/errors"
   packages = ["."]
+  pruneopts = "UT"
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
   version = "v0.8.0"
 
 [[projects]]
+  digest = "1:ba51b2c7d37f3741fcf6319ea843e88ee6a032412858de0d89a229f1725b279d"
   name = "github.com/rjeczalik/notify"
   packages = ["."]
+  pruneopts = "UT"
   revision = "52ae50d8490436622a8941bd70c3dbe0acdd4bbf"
   version = "v0.9.0"
 
 [[projects]]
+  digest = "1:0b8dd7447e420afff0260179dc892711e837edd1d446bc78dab924624a3c3c81"
   name = "github.com/rs/cors"
   packages = ["."]
+  pruneopts = "UT"
   revision = "3fb1b69b103a84de38a19c3c6ec073dd6caa4d3f"
   version = "v1.5.0"
 
 [[projects]]
   branch = "master"
+  digest = "1:f2ffd421680b0a3f7887501b3c6974bcf19217ecd301d0e2c9b681940ec363d5"
   name = "github.com/syndtr/goleveldb"
   packages = [
     "leveldb",
@@ -200,22 +245,26 @@
     "leveldb/opt",
     "leveldb/storage",
     "leveldb/table",
-    "leveldb/util"
+    "leveldb/util",
   ]
+  pruneopts = "UT"
   revision = "ae2bd5eed72d46b28834ec3f60db3a3ebedd8dbd"
 
 [[projects]]
   branch = "master"
+  digest = "1:230a66be994ebe110710c86b4c475b9050f4872ef04937b290d9c9db20436005"
   name = "golang.org/x/crypto"
   packages = [
     "pbkdf2",
     "ripemd160",
-    "scrypt"
+    "scrypt",
   ]
+  pruneopts = "UT"
   revision = "614d502a4dac94afa3a6ce146bd1736da82514c6"
 
 [[projects]]
   branch = "master"
+  digest = "1:9812eb354c055268a95354e388d47021483712b842f32ebd4cbceb144cb18488"
   name = "golang.org/x/net"
   packages = [
     "context",
@@ -225,17 +274,21 @@
     "idna",
     "internal/timeseries",
     "trace",
-    "websocket"
+    "websocket",
   ]
+  pruneopts = "UT"
   revision = "922f4815f713f213882e8ef45e0d315b164d705c"
 
 [[projects]]
   branch = "master"
+  digest = "1:a3f00ac457c955fe86a41e1495e8f4c54cb5399d609374c5cc26aa7d72e542c8"
   name = "golang.org/x/sys"
   packages = ["unix"]
+  pruneopts = "UT"
   revision = "3b58ed4ad3395d483fc92d5d14123ce2c3581fec"
 
 [[projects]]
+  digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
   name = "golang.org/x/text"
   packages = [
     "collate",
@@ -251,28 +304,34 @@
     "unicode/bidi",
     "unicode/cldr",
     "unicode/norm",
-    "unicode/rangetable"
+    "unicode/rangetable",
   ]
+  pruneopts = "UT"
   revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
   version = "v0.3.0"
 
 [[projects]]
   branch = "master"
+  digest = "1:a05bd2d296bc727082abcb63ff52615b4dcc6219d8b61e99fd83d605dc779a18"
   name = "golang.org/x/tools"
   packages = [
     "go/ast/astutil",
     "imports",
-    "internal/fastwalk"
+    "internal/fastwalk",
   ]
+  pruneopts = "UT"
   revision = "c1406c36efe20fb423f43a73518f0454febeed1f"
 
 [[projects]]
   branch = "master"
+  digest = "1:077c1c599507b3b3e9156d17d36e1e61928ee9b53a5b420f10f28ebd4a0b275c"
   name = "google.golang.org/genproto"
   packages = ["googleapis/rpc/status"]
+  pruneopts = "UT"
   revision = "c66870c02cf823ceb633bcd05be3c7cda29976f4"
 
 [[projects]]
+  digest = "1:3dd7996ce6bf52dec6a2f69fa43e7c4cefea1d4dfa3c8ab7a5f8a9f7434e239d"
   name = "google.golang.org/grpc"
   packages = [
     ".",
@@ -300,26 +359,48 @@
     "resolver/passthrough",
     "stats",
     "status",
-    "tap"
+    "tap",
   ]
+  pruneopts = "UT"
   revision = "32fb0ac620c32ba40a4626ddf94d90d12cce3455"
   version = "v1.14.0"
 
 [[projects]]
   branch = "v2"
+  digest = "1:0a2f4b974a413866afa1b41130d756643841fb9ad661b81c9a6dd9f1364ed19f"
   name = "gopkg.in/karalabe/cookiejar.v2"
   packages = ["collections/prque"]
+  pruneopts = "UT"
   revision = "8dcd6a7f4951f6ff3ee9cbb919a06d8925822e57"
 
 [[projects]]
   branch = "v2"
+  digest = "1:3d3f9391ab615be8655ae0d686a1564f3fec413979bb1aaf018bac1ec1bb1cc7"
   name = "gopkg.in/natefinch/npipe.v2"
   packages = ["."]
+  pruneopts = "UT"
   revision = "c1b8fa8bdccecb0b8db834ee0b92fdbcfa606dd6"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1fd5aa7f996fd5b6969cb84bbc8ef0428c8ff23489bc1e2be0eda2cbebdd6c9c"
+  input-imports = [
+    "github.com/consensys/zslbox/zsl",
+    "github.com/ethereum/go-ethereum",
+    "github.com/ethereum/go-ethereum/accounts/abi",
+    "github.com/ethereum/go-ethereum/accounts/abi/bind",
+    "github.com/ethereum/go-ethereum/accounts/abi/bind/backends",
+    "github.com/ethereum/go-ethereum/common",
+    "github.com/ethereum/go-ethereum/core",
+    "github.com/ethereum/go-ethereum/core/types",
+    "github.com/ethereum/go-ethereum/crypto",
+    "github.com/ethereum/go-ethereum/event",
+    "github.com/gbotrel/gopherjs-eth",
+    "github.com/gobuffalo/packr",
+    "github.com/gopherjs/gopherjs/js",
+    "github.com/johanbrandhorst/protobuf/grpcweb",
+    "github.com/johanbrandhorst/protobuf/jspb",
+    "github.com/oskca/gopherjs-vue",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

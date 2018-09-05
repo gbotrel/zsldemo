@@ -13,7 +13,7 @@ services:
       - zslnet
   # zslgeth = geth + zsl precompiled smart contracts
   zslgeth:
-    image: pegasystech/zslgeth:latest
+    image: pegasystech/zslgeth:0.1
     hostname: zslgeth
     command: --dev --rpc --rpcapi "db,eth,net,web3,clique,personal,shh" -rpccorsdomain "*" --targetgaslimit '9000000000000' --gasprice=0  --rpcaddr "0.0.0.0"  -networkid 1337
     environment:
@@ -30,7 +30,7 @@ services:
       - zslgeth-data:/root/.ethereum
   # zslbox offers grpc endpoint to compute "zcash" zkSNARK proofs 
   zslbox:
-    image: pegasystech/zslbox:latest
+    image: pegasystech/zslbox:0.1
     hostname: zslbox
     ports: 
       - 9000:9000
