@@ -1,9 +1,6 @@
 # ZSLBox DApp demonstrator
 
 
-**Note for ConsenSys Academy reviewers:** this project was started as part of my dayjob @ConsenSys and doesn't meet certain requirements (using Truffle, Metamask or EthPM). It is still work in progress but usable. I hope you enjoy exploring it!
-
-
 ## What is it
 
 This repo will get you started running [ZSLBox](https://github.com/consensys/zslbox) alongside an [ethereum node](https://github.com/gbotrel/go-ethereum) and a DApp demonstrating ZCash-like transactions.
