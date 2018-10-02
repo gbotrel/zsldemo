@@ -92,5 +92,5 @@ go test
 
 It is a [GopherJS](https://github.com/gopherjs/gopherjs) experiment, and while few things are frustrating (for example, the 1.5 mb size of the minified JS output), it works surpinsingly well. Go 1.11 is introducing WASM, and I believe in the coming months, we could see a credible dev/prod workflow to develop DApp in Go, whether because it is a native DApp, or because like me, you're allergic to untyped Javascript (`gulp`, `bower`,`npm`,`yarn`,`browserify`,`webpack`,`clojure`,...) and happy with the excellent standard lib and toolchain from go (`go vet`, `go build`, `go test`, `go generate`, `go doc`, `dep`)
 
-If you want to know more or get notified for what's coming next, get in touch (see my profile) or follow ConsenSys & me on Medium. 
+If you want to know more or get notified for what's coming next, get in touch (privacy-dev@pegasys.tech) or follow ConsenSys & me on Medium. 
 
